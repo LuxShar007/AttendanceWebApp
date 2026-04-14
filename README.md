@@ -171,6 +171,7 @@ axiom-attendance-dashboard/
 |---|---|---|
 | **Sharvin Mhatre** | 125BT041016 | Electronics & Computer Science Engineering |
 | **Sharvani Jorwekar** | 125BT041007 | Electronics & Computer Science Engineering |
+| **Kashvi Kurkute** | — | Electronics & Computer Science Engineering |
 
 **Institution:** SIES Graduate School of Technology, Nerul, Navi Mumbai
 **Academic Year:** 2025–26 | Semester II
