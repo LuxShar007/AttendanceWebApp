@@ -8,7 +8,7 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-e81cff?style=for-the-badge)
 ![Built With](https://img.shields.io/badge/built%20with-Vite%20%2B%20Vanilla%20JS-646cff?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-10a37f?style=for-the-badge)
-![Deployed On](https://img.shields.io/badge/deployed%20on-Netlify-00C7B7?style=for-the-badge&logo=netlify)
+![Deployed On](https://img.shields.io/badge/deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)
 
 </div>
 
