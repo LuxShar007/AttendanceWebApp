@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axiom Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+
+    <!-- Global Liquid Background Swirl -->
+    <div class="liquid-bg show" id="persistent-liquid">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="glass-overlay" id="persistent-glass"></div>
+
+    <!-- State 1 & 3: Intro Animation Layer -->
+    <div id="intro-layer" class="layer active">
+      <h1 id="axiom-text" class="axiom-text">
+        <span>Ax</span><span id="axiom-i">i</span><span>om</span>
+      </h1>
+    </div>
+
+    <!-- State 2: Login Layer -->
+    <div id="login-layer" class="layer hidden">
+      <div class="login-card">
+        <h2 id="welcome-heading">Welcome to Axiom</h2>
+        <p>Please strictly authenticate</p>
+        <form id="login-form">
+          <p id="login-error" style="color: var(--color-red); font-size: 0.85rem; margin-bottom: 1rem; display: none;">Invalid Access ID or Passcode.</p>
+          <div class="input-field">
+            <input type="text" id="access-id" placeholder="Access ID (Username)" required />
+          </div>
+          <div class="input-field">
+            <input type="password" id="passcode" placeholder="Passcode (PRN)" required />
+          </div>
+          <button type="submit" class="primary-btn">Initialize</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- State 4: Dashboard Layer -->
+    <div id="dashboard-layer" class="layer hidden" style="background-color: var(--bg-color);">
+      <div class="app-container">
+        <header class="header">
+          <div class="header-content">
+            <h1>Axiom</h1>
+            <p id="user-display-name">Intelligence & Attendance Control System</p>
+          </div>
+          <div class="overall-badge">
+             Overall: <span id="overall-attendance">90.94%</span>
+          </div>
+          <button id="logout-btn" class="logout-btn">↩ Logout</button>
+        </header>
+
+        <main class="dashboard">
+          <!-- ISE Exam Calendar Panel -->
+          <section class="ise-panel" id="ise-panel">
+            <div class="ise-panel-header">
+              <span class="ise-panel-icon">📅</span>
+              <h2>ISE Exam Calendar</h2>
+              <span class="ise-subtitle">Internal Semester Examinations</span>
+            </div>
+            <div class="ise-grid" id="ise-grid">
+              <!-- Injected via JS -->
+            </div>
+          </section>
+
+          <div id="subjects-container" class="subjects-grid">
+            <!-- Simulated cards injected via JS -->
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Template for Prepopulated Subject Card -->
+    <template id="subject-card-template">
+      <div class="subject-card">
+        <div class="card-header">
+          <h3 class="subject-name">Subject Name</h3>
+        </div>
+        
+        <div class="input-group">
+          <!-- Removed inputs, replaced with simulation displays -->
+          <div class="count-display">
+            <span class="count-val attended-val">0</span> / <span class="count-val total-val">0</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Percentage</span>
+            <span class="stat-value percentage-display">0%</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Marks</span>
+            <span class="stat-value marks-display">0/5</span>
+          </div>
+        </div>
+
+        <div class="notification-area">
+          <div class="smart-notification badge">Calculate</div>
+          <p class="tactical-advice">Awaiting data...</p>
+        </div>
+
+        <!-- Simulation Controls -->
+        <div class="sim-controls">
+          <button class="sim-btn sim-bunk">- Bunk Next</button>
+          <button class="sim-btn sim-attend">+ Attend Next</button>
+        </div>
+      </div>
+    </template>
+
+    <!-- Global Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
