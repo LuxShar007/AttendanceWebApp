@@ -8,7 +8,7 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-e81cff?style=for-the-badge)
 ![Built With](https://img.shields.io/badge/built%20with-Vite%20%2B%20Vanilla%20JS-646cff?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-10a37f?style=for-the-badge)
-![Deployed On](https://img.shields.io/badge/deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)
+![Deployed On](https://img.shields.io/badge/deployed%20on-Netlify-00C7B7?style=for-the-badge&logo=netlify)
 
 </div>
 
@@ -165,15 +165,16 @@ axiom-attendance-dashboard/
 
 ---
 
-## 👥 Authors
+## 👥 Team
 
-| Name | PRN | Branch |
-|---|---|---|
-| **Sharvin Mhatre** | 125BT041016 | Electronics & Computer Science Engineering |
-| **Sharvani Jorwekar** | 125BT041007 | Electronics & Computer Science Engineering |
-| **Kashvi Kurkute** | — | Electronics & Computer Science Engineering |
+| Avatar | Name | Role | Contribution |
+|---|---|---|---|
+| **SM** | **Sharvin Mhatre** `125BT041016` | 🏗️ Architect & Lead Developer | Conceptualized the entire project. Built the full web application — SPA routing, 144Hz liquid animations, secure auth, simulation engine, smart notifications, ISE calendar, audio integration, and Netlify deployment. |
+| **SJ** | **Sharvani Jorwekar** `125BT041007` | 💡 Feature Contributor | Provided real-world attendance data from SIES ERP and shaped the notification and leave simulation features. |
+| **KK** | **Kashvi Kurkute** | 📋 Implementation Planner | Contributed to the project roadmap, module planning, and structural design of the attendance logic flow. |
 
-**Institution:** SIES Graduate School of Technology, Nerul, Navi Mumbai
+**Institution:** SIES Graduate School of Technology, Nerul, Navi Mumbai  
+**Branch:** Electronics & Computer Science Engineering  
 **Academic Year:** 2025–26 | Semester II
 
 ---

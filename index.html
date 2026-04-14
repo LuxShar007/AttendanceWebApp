@@ -53,8 +53,53 @@
           <div class="overall-badge">
              Overall: <span id="overall-attendance">90.94%</span>
           </div>
+          <button id="about-btn" class="about-btn">✦ About</button>
           <button id="logout-btn" class="logout-btn">↩ Logout</button>
         </header>
+
+      <!-- About Modal -->
+      <div id="about-modal" class="about-modal hidden">
+        <div class="about-backdrop"></div>
+        <div class="about-card">
+          <button id="about-close" class="about-close">&times;</button>
+
+          <div class="about-logo">✦ Axiom</div>
+          <p class="about-tagline">Intelligence &amp; Attendance Control System</p>
+          <p class="about-desc">A premium, real-time attendance simulation engine built for SIES Graduate School of Technology, Electronics &amp; Computer Science Engineering — Semester II, 2025–26.</p>
+
+          <div class="about-team">
+            <div class="about-member lead">
+              <div class="about-avatar">SM</div>
+              <div class="about-info">
+                <h3>Sharvin Mhatre</h3>
+                <span class="about-role">Architect &amp; Lead Developer</span>
+                <p>Conceptualized and built the entire web application — SPA architecture, 144Hz animations, authentication, simulation engine, notifications, ISE calendar, and deployment.</p>
+              </div>
+            </div>
+            <div class="about-member">
+              <div class="about-avatar">SJ</div>
+              <div class="about-info">
+                <h3>Sharvani Jorwekar</h3>
+                <span class="about-role">Feature Contributor</span>
+                <p>Provided attendance data, feature suggestions and real-world use-case requirements that shaped the simulation and notification systems.</p>
+              </div>
+            </div>
+            <div class="about-member">
+              <div class="about-avatar">KK</div>
+              <div class="about-info">
+                <h3>Kashvi Kurkute</h3>
+                <span class="about-role">Implementation Planner</span>
+                <p>Contributed to the project roadmap, implementation planning, and structural design of the attendance logic flow.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-footer">
+            <span>FEL205 Mini Project &nbsp;·&nbsp; SIES GST</span>
+            <a href="https://github.com" target="_blank" class="about-github">View on GitHub ↗</a>
+          </div>
+        </div>
+      </div>
 
         <main class="dashboard">
           <!-- ISE Exam Calendar Panel -->

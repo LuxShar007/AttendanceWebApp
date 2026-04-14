@@ -91,6 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // About Modal
+  const aboutModal = document.getElementById('about-modal');
+  document.getElementById('about-btn').addEventListener('click', () => {
+    aboutModal.classList.remove('hidden');
+  });
+  document.getElementById('about-close').addEventListener('click', () => {
+    aboutModal.classList.add('hidden');
+  });
+  document.querySelector('.about-backdrop').addEventListener('click', () => {
+    aboutModal.classList.add('hidden');
+  });
+
   // Valid users from prompt
   const authUsers = [
     { username: '125bt041016', password: '125BT041016', name: 'Sharvin Mhatre',    branch: 'Electronics & Computer Science Engineering', prn: '125BT041016' },
