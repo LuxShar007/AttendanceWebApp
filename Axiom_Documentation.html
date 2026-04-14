@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Axiom — Project Documentation | FEL205</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --magenta: #e81cff;
+      --bg: #0a0a0a;
+      --card: #111;
+      --border: rgba(255,255,255,0.08);
+      --text: #ececec;
+      --muted: #888;
+      --blue: #3b82f6;
+      --green: #10a37f;
+      --amber: #f59e0b;
+      --red: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Cover Page */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: radial-gradient(ellipse at 50% 30%, rgba(232,28,255,0.15) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: var(--magenta);
+      border-radius: 50%;
+      filter: blur(160px);
+      opacity: 0.07;
+      top: -100px; left: -100px;
+    }
+
+    .cover-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--magenta);
+      border: 1px solid rgba(232,28,255,0.3);
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+    }
+
+    .cover-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .cover-title span { color: var(--magenta); }
+
+    .cover-subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .cover-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cover-meta strong { color: var(--text); }
+
+    .cover-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--magenta);
+      border-radius: 2px;
+      margin: 2rem auto;
+    }
+
+    /* Content */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 5rem;
+    }
+
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--magenta);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 2rem 0 0.8rem;
+    }
+
+    p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.88rem;
+    }
+
+    th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.04);
+      color: var(--magenta);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      vertical-align: top;
+    }
+
+    td strong, td b { color: var(--text); }
+
+    tr:last-child td { border-bottom: none; }
+
+    /* Code */
+    pre {
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--magenta);
+      border-radius: 10px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-size: 0.85rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: #c9d1d9;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: rgba(255,255,255,0.06);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85em;
+      color: var(--magenta);
+    }
+
+    /* Callout boxes */
+    .callout {
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .callout.important {
+      background: rgba(232,28,255,0.08);
+      border: 1px solid rgba(232,28,255,0.25);
+    }
+
+    .callout.tip {
+      background: rgba(16,163,127,0.08);
+      border: 1px solid rgba(16,163,127,0.25);
+    }
+
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .callout-body { color: var(--muted); }
+    .callout-body strong { color: var(--text); }
+
+    /* Feature cards */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+
+    .feature-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+
+    .feature-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Team */
+    .team-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .team-card {
+      display: flex;
+      gap: 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      align-items: flex-start;
+    }
+
+    .team-card.lead { border-color: rgba(232,28,255,0.3); }
+
+    .team-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .team-card.lead .team-avatar {
+      background: rgba(232,28,255,0.15);
+      border-color: var(--magenta);
+      color: var(--magenta);
+    }
+
+    .team-info h3 { margin: 0 0 0.2rem; font-size: 1rem; }
+
+    .team-role {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--magenta);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .team-card:nth-child(2) .team-role { color: var(--blue); }
+    .team-card:nth-child(3) .team-role { color: var(--green); }
+
+    .team-info p { margin: 0; font-size: 0.86rem; }
+
+    /* QA Section */
+    .qa-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .qa-q {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .qa-q::before { content: 'Q  '; color: var(--magenta); font-weight: 800; }
+
+    .qa-a {
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding-left: 1.4rem;
+      border-left: 2px solid rgba(255,255,255,0.1);
+      line-height: 1.6;
+    }
+
+    /* Formula */
+    .formula-box {
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .formula {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: #c9d1d9;
+      margin: 0.4rem 0;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .formula-label {
+      color: var(--magenta);
+      min-width: 160px;
+      flex-shrink: 0;
+    }
+
+    /* Marks table highlight */
+    .mark-5 td { color: var(--green) !important; }
+    .mark-4 td { color: #6ee7b7 !important; }
+    .mark-0 td { color: var(--red) !important; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer strong { color: var(--magenta); }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #111; }
+      .cover { background: #fff; min-height: 0; padding: 3rem 2rem; }
+      .cover-title { color: #111; }
+      .cover-title span, .cover-label, .team-role, .section-number, code { color: #9000b0; }
+      pre, .formula-box, .qa-item, .feature-card, .team-card, .callout { background: #f9f9f9; border-color: #ddd; }
+      p, td, .callout-body, .qa-a, .feature-card p, .team-info p { color: #444; }
+      th { color: #9000b0; }
+      td strong, h2, h3, .qa-q, .feature-card h4, .team-info h3, .cover-subtitle { color: #111; }
+      footer { color: #666; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-label">FEL205 · Mini Project Documentation</div>
+  <h1 class="cover-title">✦ <span>Axiom</span></h1>
+  <p class="cover-subtitle">Intelligence &amp; Attendance Control System</p>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">
+    <p><strong>Institution:</strong> SIES Graduate School of Technology, Nerul, Navi Mumbai</p>
+    <p><strong>Branch:</strong> Electronics &amp; Computer Science Engineering</p>
+    <p><strong>Subject:</strong> FEL205 — Object Oriented Programming Methodology Lab</p>
+    <p><strong>Academic Year:</strong> 2025–26 | Semester II</p>
+    <p><strong>Students:</strong> Sharvin Mhatre · Sharvani Jorwekar · Kashvi Kurkute</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-number">Section 01</div>
+    <h2>Project Overview</h2>
+    <p><strong>Axiom</strong> is a production-grade web application that replaces manual attendance calculations with an intelligent, real-time simulation engine. Students can simulate future attendance decisions, check ISE exam schedules, and receive smart notifications about their academic standing — all through a premium dark-mode interface.</p>
+    <p>The system consists of two layers:</p>
+    <table>
+      <tr><th>Layer</th><th>Technology</th><th>Purpose</th></tr>
+      <tr><td><strong>Java Backend Core</strong></td><td>OOP-based Java with Swing GUI</td><td>Original attendance logic engine — the foundation of all calculations</td></tr>
+      <tr><td><strong>Web Application</strong></td><td>Vite + Vanilla JS + CSS3</td><td>Live-deployed SPA translating Java OOP into a globally accessible browser experience</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-number">Section 02</div>
+    <h2>OOP Concepts — FEL205 Syllabus Mapping</h2>
+
+    <h3>Module 1 — Introduction to OOP</h3>
+    <table>
+      <tr><th>OOP Concept</th><th>Implementation in Axiom</th></tr>
+      <tr><td><strong>Class &amp; Object</strong></td><td><code>AttendanceLogic</code> class; objects hold subject attendance state per instance</td></tr>
+      <tr><td><strong>Encapsulation</strong></td><td>Private fields <code>attended</code>, <code>total</code> accessed only via public methods</td></tr>
+      <tr><td><strong>Abstraction</strong></td><td><code>AttendanceLogic</code> abstracts raw math — GUI calls <code>calculatePercentage()</code> without knowing the formula</td></tr>
+      <tr><td><strong>Inheritance</strong></td><td><code>AttendanceGUI extends JFrame</code> — inherits entire Window framework</td></tr>
+      <tr><td><strong>Polymorphism</strong></td><td><code>calculate()</code> behaves differently for leave buffer vs recovery calculations</td></tr>
+      <tr><td><strong>Message Passing</strong></td><td><code>ActionListener.actionPerformed()</code> — button object sends message to logic layer</td></tr>
+    </table>
+
+    <h3>Module 2 — Class, Object, Packages &amp; I/O</h3>
+    <pre>// Encapsulation — private fields with public methods
+private int attended;
+private int total;
+
+public double calculatePercentage() {
+    return (attended / (double) total) * 100;
+}</pre>
+    <p>Additional patterns: <code>this</code> keyword in constructors, <code>static</code> mark bracket constants, <code>private/public/protected</code> access modifiers throughout.</p>
+
+    <h3>Module 3 — Arrays, Strings &amp; Vectors</h3>
+    <pre>// All 13 subjects stored in an array of objects
+SubjectData[] subjects = new SubjectData[13];
+subjects[0] = new SubjectData("AM-II", 39, 35);
+// String manipulation for notification messages
+String msg = String.format("Attend %d more classes to reach 75%%", recovery);</pre>
+
+    <h3>Module 4 — Inheritance, Polymorphism &amp; Abstraction</h3>
+    <pre>// Inheritance from JFrame
+public class AttendanceGUI extends JFrame {
+    public AttendanceGUI() {
+        super("Axiom — Attendance Dashboard");
+        setLayout(new GridBagLayout());
+    }
+}
+// Method Overriding — ActionListener interface
+calculateBtn.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        performCalculation(); // polymorphic dispatch
+    }
+});</pre>
+
+    <h3>Module 5 — Exception Handling</h3>
+    <pre>try {
+    int attended = Integer.parseInt(attendedField.getText());
+    int total    = Integer.parseInt(totalField.getText());
+    if (total == 0) throw new ArithmeticException("Total cannot be zero");
+    if (attended > total) throw new IllegalArgumentException("Attended > Total");
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Please enter valid numbers.");
+} catch (ArithmeticException | IllegalArgumentException e) {
+    JOptionPane.showMessageDialog(this, e.getMessage());
+}</pre>
+
+    <h3>Module 6 — GUI Programming in Java (Swing)</h3>
+    <table>
+      <tr><th>Component</th><th>Used For</th></tr>
+      <tr><td><code>JFrame</code></td><td>Main application window</td></tr>
+      <tr><td><code>JPanel</code></td><td>Subject card containers</td></tr>
+      <tr><td><code>JLabel</code></td><td>Subject names, percentage display</td></tr>
+      <tr><td><code>JTextField</code></td><td>Attended / Total class inputs</td></tr>
+      <tr><td><code>JButton</code></td><td>Calculate trigger with ActionListener</td></tr>
+      <tr><td><code>JScrollPane</code></td><td>Scrollable multi-subject dashboard</td></tr>
+      <tr><td><code>GridBagLayout</code></td><td>Responsive card-based layout</td></tr>
+      <tr><td><code>Font</code>, <code>Color</code></td><td>Dark mode UI styling equivalent</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-number">Section 03</div>
+    <h2>Core Formulae</h2>
+
+    <div class="formula-box">
+      <div class="formula"><span class="formula-label">Attendance %</span><span>= ( Attended ÷ Total ) × 100</span></div>
+      <div class="formula"><span class="formula-label">Leave Buffer</span><span>= ⌊ ( 100 × Attended ÷ TargetPct ) − Total ⌋</span></div>
+      <div class="formula"><span class="formula-label">Recovery Needed</span><span>= ⌈ ( TargetPct × Total − 100 × Attended ) ÷ ( 100 − TargetPct ) ⌉</span></div>
+    </div>
+
+    <h3>Internal Marks Bracket System</h3>
+    <table>
+      <tr><th>Attendance %</th><th>Internal Marks</th><th>Status</th></tr>
+      <tr class="mark-5"><td><strong>≥ 95%</strong></td><td><strong>5 / 5</strong></td><td>Maximum</td></tr>
+      <tr><td>≥ 90%</td><td>4 / 5</td><td>Excellent</td></tr>
+      <tr><td>≥ 85%</td><td>3 / 5</td><td>Good</td></tr>
+      <tr><td>≥ 80%</td><td>2 / 5</td><td>Average</td></tr>
+      <tr><td>≥ 75%</td><td>1 / 5</td><td>Minimum Safe</td></tr>
+      <tr class="mark-0"><td><strong>&lt; 75%</strong></td><td><strong>0 / 5 ⚠️</strong></td><td>Red Alert</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-number">Section 04</div>
+    <h2>Key Features &amp; Uniqueness</h2>
+
+    <div class="callout important">
+      <span class="callout-icon">⭐</span>
+      <div class="callout-body"><strong>Examiner tip:</strong> These features go significantly beyond a standard mini-project. Emphasize the production-grade quality and the breadth of technologies used.</div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌊</div>
+        <h4>144Hz Liquid Glassmorphism Intro</h4>
+        <p>CSS @keyframes + backdrop-filter blobs swirl at hardware-accelerated frame rates. Zoom locks onto the "i" in Axiom using precise DOM coordinate math.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h4>Secure Multi-User Authentication</h4>
+        <p>PRN-based login with real-time username recognition. Dynamic "Welcome Sharvin" heading animates with blur-to-focus spring easing the instant credentials are recognized.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h4>Simulation Engine</h4>
+        <p>[ + Attend ] and [ − Bunk ] buttons simulate future classes and instantly recalculate percentage, marks, and leave buffer without touching historical data.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <h4>Smart Notification System</h4>
+        <p>Toast alerts fire on login with iOS audio for RED ALERT (&lt;75%), MANDATORY (0 buffer), and UPGRADE POTENTIAL (within 2% of bracket jump) states.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h4>ISE Exam Calendar</h4>
+        <p>Live countdown cards with red/amber urgency glow for upcoming Internal Exams. Reminder toasts fire automatically on login if exam is within 3 days.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h4>Global Deployment</h4>
+        <p>Deployed on Vercel's global CDN — accessible worldwide from any browser with zero installation. Production build completed in 248ms via Vite 8.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-number">Section 05</div>
+    <h2>Viva Q&amp;A Preparation</h2>
+
+    <div class="qa-item">
+      <div class="qa-q">What OOP concept does <code>AttendanceGUI extends JFrame</code> demonstrate?</div>
+      <div class="qa-a"><strong>Inheritance.</strong> <code>AttendanceGUI</code> inherits all properties and methods of JFrame — such as <code>setTitle()</code>, <code>setSize()</code>, <code>setVisible()</code> — without re-implementing them. This is single inheritance in Java.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">How is Encapsulation achieved in your project?</div>
+      <div class="qa-a">The <code>attended</code> and <code>total</code> fields in <code>AttendanceLogic</code> are declared <strong>private</strong>. External classes access them only through public methods like <code>getPercentage()</code>, protecting internal state integrity — the core principle of encapsulation.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">Where is Polymorphism demonstrated?</div>
+      <div class="qa-a">The <code>ActionListener</code> interface's <code>actionPerformed()</code> method is overridden for each button (Calculate, Bunk, Attend). Same method signature — different runtime behaviour depending on which button fired. This is <strong>runtime polymorphism</strong> via method overriding.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">Why deploy a web app in addition to a Java application?</div>
+      <div class="qa-a">The Java application requires a local JDK installation. The web app is globally accessible from any browser with zero installation, proving the <strong>portability of OOP logic</strong> across languages and platforms. Both layers share identical mathematical formulae.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">What design pattern does the Simulation Engine use?</div>
+      <div class="qa-a">The <strong>State Pattern</strong>. Each subject card maintains its own <code>currentTotal</code> and <code>currentAttended</code> state — analogous to Java instance variables. Clicking Bunk/Attend mutates private state and triggers a re-render, exactly like a Java setter mutating encapsulated fields.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">How does the notification system relate to Java's event model?</div>
+      <div class="qa-a">JavaScript's <code>addEventListener('click', handler)</code> is functionally identical to Java's <code>addActionListener(new ActionListener(){...})</code>. Both register a callback invoked when a user interaction fires — this is the <strong>Observer / Event-Driven</strong> programming pattern, directly from Module 6.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="section">
+    <div class="section-number">Section 06</div>
+    <h2>ISE Exam Schedule</h2>
+    <table>
+      <tr><th>Subject</th><th>Type</th><th>Date</th><th>Status</th></tr>
+      <tr><td>EG</td><td>ISE</td><td>08-Apr-2026</td><td>✅ Completed</td></tr>
+      <tr><td>DSD</td><td>ISE</td><td>09-Apr-2026</td><td>✅ Completed</td></tr>
+      <tr><td>AC</td><td>ISE-I</td><td>09-Apr-2026</td><td>✅ Completed</td></tr>
+      <tr><td><strong>AC</strong></td><td><strong>PPT</strong></td><td><strong>16-Apr-2026</strong></td><td>🔴 Urgent</td></tr>
+      <tr><td><strong>AM-II</strong></td><td><strong>ISE-II</strong></td><td><strong>17-Apr-2026</strong></td><td>🔴 Urgent</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="section">
+    <div class="section-number">Section 07</div>
+    <h2>Team</h2>
+
+    <div class="team-grid">
+      <div class="team-card lead">
+        <div class="team-avatar">SM</div>
+        <div class="team-info">
+          <h3>Sharvin Mhatre <span style="color:var(--muted);font-weight:400;font-size:0.85rem">· 125BT041016</span></h3>
+          <span class="team-role">Architect &amp; Lead Developer</span>
+          <p>Conceptualized the entire project and built the full web application — SPA routing, 144Hz liquid animations, secure PRN-based authentication, real-time simulation engine, smart notification system, ISE calendar, Web Audio API integration, and Vercel deployment.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">SJ</div>
+        <div class="team-info">
+          <h3>Sharvani Jorwekar <span style="color:var(--muted);font-weight:400;font-size:0.85rem">· 125BT041007</span></h3>
+          <span class="team-role">Feature Contributor</span>
+          <p>Provided real SIES ERP attendance data, contributed feature requirements and real-world use-case scenarios that shaped the leave simulation and notification alert systems.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">KK</div>
+        <div class="team-info">
+          <h3>Kashvi Kurkute</h3>
+          <span class="team-role">Implementation Planner</span>
+          <p>Contributed to the project roadmap, implementation planning, and the structural design of the attendance calculation logic flow and module architecture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conclusion -->
+  <div class="section">
+    <div class="section-number">Conclusion</div>
+    <h2>Summary</h2>
+    <p>Axiom successfully demonstrates all six modules of the FEL205 OOP syllabus through a dual-layer implementation.</p>
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">The project goes significantly beyond a standard mini-project by incorporating real-world engineering concerns: secure authentication, multi-user data isolation, hardware-accelerated animations, Web Audio API, ISE date reminders, and global CDN deployment — making it a <strong>production-grade application</strong> rather than an academic prototype.</div>
+    </div>
+    <table>
+      <tr><th>Layer</th><th>Key OOP Concepts Demonstrated</th></tr>
+      <tr><td><strong>Java (Swing)</strong></td><td>Classes, Objects, Encapsulation, Inheritance (JFrame), Polymorphism (ActionListener), Exception Handling, GUI with AWT/Swing</td></tr>
+      <tr><td><strong>Web App (JS)</strong></td><td>Module pattern (Encapsulation), Closures (State), Event-driven programming (Observer), DOM abstraction, Deployment engineering</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <strong>✦ Axiom</strong> — Intelligence &amp; Attendance Control System<br>
+  FEL205 Mini Project · SIES Graduate School of Technology · Electronics &amp; Computer Science Engineering · 2025–26
+</footer>
+
+</body>
+</html>
