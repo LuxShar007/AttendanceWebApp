@@ -1,8 +1,12 @@
-import notifySfx from './src/assets/antic_ios_17.mp3';
-
-// Pre-load audio so it's instant on first play
-const notifyAudio = new Audio(notifySfx);
-notifyAudio.volume = 0.6;
+// Safe audio loader — won't crash if bundler or browser blocks it
+let notifyAudio = null;
+try {
+  const notifySfx = new URL('./src/assets/antic_ios_17.mp3', import.meta.url).href;
+  notifyAudio = new Audio(notifySfx);
+  notifyAudio.volume = 0.6;
+} catch(e) {
+  console.warn('Audio not available:', e);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // SPA Layers
@@ -384,8 +388,10 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(toast);
     
     // Play notification sound
-    notifyAudio.currentTime = 0;
-    notifyAudio.play().catch(() => {}); // catch needed for browser autoplay policy
+    if (notifyAudio) {
+      notifyAudio.currentTime = 0;
+      notifyAudio.play().catch(() => {});
+    }
     
     // Smooth intro animation
     requestAnimationFrame(() => {
