@@ -613,6 +613,16 @@ body {
 }
 .about-github:hover { opacity: 0.7; }
 
+.about-footer-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.about-docs-btn {
+  color: var(--color-safe) !important;
+}
+
 /* --- ISE Calendar Panel --- */
 .ise-panel {
   margin-bottom: 2.5rem;
